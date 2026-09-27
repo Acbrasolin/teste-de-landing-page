@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Gabriel Vance | Consultoria Estratégica & Mentor de Negócios</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fdf8e6',
+                            100: '#fbeec2',
+                            200: '#f6dc85',
+                            300: '#f1ca48',
+                            400: '#ebb81b',
+                            500: '#d4a017',
+                            600: '#b08010',
+                            700: '#8c630d',
+                            800: '#694a0a',
+                            900: '#4d3607',
+                        },
+                        darkBg: '#090a0f',
+                        cardBg: '#12151e',
+                        cardHover: '#1a1f2e'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090a0f;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Scroll reveal initial hidden state */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glow effects */
+        .glow-gold {
+            box-shadow: 0 0 40px -10px rgba(212, 160, 23, 0.3);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fbeec2 0%, #d4a017 50%, #b08010 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Floating buttons pulse */
+        @keyframes floatPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float {
+            animation: floatPulse 2.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#090a0f] text-slate-100 antialiased selection:bg-gold-500 selection:text-black">
+
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#090a0f]/85 backdrop-blur-md border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-gold-600 to-gold-400 flex items-center justify-center text-black font-extrabold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                    GV
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight text-white group-hover:text-gold-400 transition-colors">Dr. Gabriel Vance</span>
+                    <span class="text-xs text-gold-400/80 font-medium tracking-widest uppercase">Estratégia & Negócios</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#sobre" class="hover:text-gold-400 transition-colors">Sobre Mim</a>
+                <a href="#servicos" class="hover:text-gold-400 transition-colors">Soluções</a>
+                <a href="#resultados" class="hover:text-gold-400 transition-colors">Resultados</a>
+                <a href="#depoimentos" class="hover:text-gold-400 transition-colors">Depoimentos</a>
+                <a href="#faq" class="hover:text-gold-400 transition-colors">FAQ</a>
+            </nav>
+
+            <!-- CTA Header -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/5511951186210?text=Olá,%20Dr.%20Gabriel!%20Vim%20através%20da%20sua%20landing%20page%20e%20gostaria%20de%20agendar%20uma%20conversa%20estratégica." target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-black font-semibold text-sm hover:from-gold-400 hover:to-gold-500 transition-all shadow-lg hover:shadow-gold-500/20">
+                    Agendar Sessão
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none p-2" aria-label="Abrir Menu">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-[#12151e] border-b border-white/10 px-6 py-6 flex flex-col gap-4 shadow-2xl">
+            <a href="#sobre" class="mobile-link text-slate-300 hover:text-gold-400 font-medium py-2 border-b border-white/5">Sobre Mim</a>
+            <a href="#servicos" class="mobile-link text-slate-300 hover:text-gold-400 font-medium py-2 border-b border-white/5">Soluções</a>
+            <a href="#resultados" class="mobile-link text-slate-300 hover:text-gold-400 font-medium py-2 border-b border-white/5">Resultados</a>
+            <a href="#depoimentos" class="mobile-link text-slate-300 hover:text-gold-400 font-medium py-2 border-b border-white/5">Depoimentos</a>
+            <a href="#faq" class="mobile-link text-slate-300 hover:text-gold-400 font-medium py-2 border-b border-white/5">FAQ</a>
+            <a href="https://wa.me/5511951186210?text=Olá,%20Dr.%20Gabriel!%20Vim%20através%20da%20sua%20landing%20page%20e%20gostaria%20de%20agendar%20uma%20conversa%20estratégica." target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold text-center mt-2">
+                Agendar Conversa
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gold-900/20 via-[#090a0f] to-[#090a0f]">
+        <!-- Background decorative blur blobs -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left text content -->
+                <div class="lg:col-span-7 text-center lg:text-left reveal">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                        <i class="fa-solid fa-crown text-[10px]"></i> Mentor & Estrategista Corporativo
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.15] mb-6">
+                        Escale seu negócio com <span class="text-gradient">governança, lucidez e previsibilidade.</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Transforme empresas estagnadas em máquinas de alta rentabilidade através de processos estruturados, posicionamento de autoridade e estratégia de ponta.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12">
+                        <a href="https://wa.me/5511951186210?text=Olá,%20Gabriel!%20Quero%20saber%20mais%20sobre%20a%20Mentoria%20Executiva." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold text-base hover:from-gold-400 hover:to-gold-500 transition-all shadow-xl hover:shadow-gold-500/30 flex items-center justify-center gap-3 group">
+                            <span>Quero Escalar Meu Negócio</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#servicos" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold text-base transition-all text-center">
+                            Conhecer Soluções
+                        </a>
+                    </div>
+
+                    <!-- Mini metrics footer in hero -->
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-gold-400">+R$ 150M</div>
+                            <div class="text-xs text-slate-400 mt-1 font-medium">Gerados em receita</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">+120</div>
+                            <div class="text-xs text-slate-400 mt-1 font-medium">Empresas mentoradas</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-gold-400">14 Anos</div>
+                            <div class="text-xs text-slate-400 mt-1 font-medium">De mercado</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right image / Card showcase -->
+                <div class="lg:col-span-5 reveal">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Glow card background -->
+                        <div class="absolute -inset-1.5 bg-gradient-to-r from-gold-600 to-gold-400 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+                        
+                        <div class="relative bg-[#12151e] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl">
+                            <!-- Expert Badge Header -->
+                            <div class="flex items-center gap-4 mb-6">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=400" alt="Dr. Gabriel Vance" class="w-16 h-16 rounded-2xl object-cover border-2 border-gold-500/50 shadow-md" onerror="this.src='https://placehold.co/150x150/12151e/d4a017?text=GV'">
+                                <div>
+                                    <h3 class="font-bold text-lg text-white">Dr. Gabriel Vance</h3>
+                                    <p class="text-xs text-gold-400">PhD em Estratégia & Ex-Executivo</p>
+                                    <div class="flex items-center gap-1 text-amber-400 text-xs mt-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <span class="text-slate-400 ml-1">(5.0 Avaliações)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quote / Quote card -->
+                            <div class="bg-black/30 rounded-2xl p-4 border border-white/5 mb-6 text-slate-300 text-sm italic">
+                                "O sucesso nos negócios não é fruto do acaso, mas sim de arquitetura estratégica rigorosa e execução implacável."
+                            </div>
+
+                            <!-- Checklist features -->
+                            <ul class="space-y-3 mb-8 text-sm text-slate-300">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center text-xs">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <span>Diagnóstico profundo de gargalos</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center text-xs">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <span>Estruturação de equipes autogerenciáveis</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center text-xs">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <span>Plano de expansão de margem de lucro</span>
+                                </li>
+                            </ul>
+
+                            <a href="https://instagram.com/castelloxqw" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-sm transition-all flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-instagram text-pink-500"></i>
+                                <span>Acompanhar no Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-24 bg-[#0d1017] border-t border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 reveal">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-tr from-gold-500/20 to-transparent rounded-3xl blur-lg"></div>
+                        <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800" alt="Dr. Gabriel Vance Palestrando" class="w-full h-[400px] sm:h-[480px] object-cover hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x480/12151e/d4a017?text=Gabriel+Vance'">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-4">
+                        Quem é o Mentor
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-6">
+                        Uma trajetória construída na prática de grandes corporações e alta escala.
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-lg mb-6 leading-relaxed">
+                        Formado em Administração Estratégica com passagem pelas principais instituições de consultoria da Europa e América Latina, Dr. Gabriel Vance ajudou mais de 120 empresas a saírem do caos operacional para o lucro previsível.
+                    </p>
+                    <p class="text-slate-400 text-sm sm:text-base mb-8 leading-relaxed">
+                        Acreditamos que todo empresário merece ter liberdade de tempo e dinheiro. Nossa metodologia não traz teorias acadêmicas vazias, mas sim frameworks testados em cenários de alta complexidade e volatilidade econômica.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2.5 rounded-xl bg-gold-500/10 text-gold-400 text-lg">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Foco em Resultado</h4>
+                                <p class="text-xs text-slate-400 mt-1">Métricas claras em cada trimestre.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-2.5 rounded-xl bg-gold-500/10 text-gold-400 text-lg">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Método Validado</h4>
+                                <p class="text-xs text-slate-400 mt-1">Processos blindados contra crises.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services & Products Section -->
+    <section id="servicos" class="py-24 bg-[#090a0f] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-4">
+                    Soluções Exclusivas
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
+                    Escolha o nível de acompanhamento ideal para o seu momento.
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Programas sob medida para empresários que desejam destravar o crescimento e liderar o mercado.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-3xl p-8 flex flex-col justify-between relative hover:border-gold-500/50 transition-all duration-300 reveal group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Diagnóstico</span>
+                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Imersão Diagnóstica</h3>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                            Análise profunda de 360 graus do seu negócio com relatório executivo de gargalos e plano de ação imediato para 90 dias.
+                        </p>
+                        <ul class="space-y-3 mb-8 text-sm text-slate-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> 1 Reunião de 3h ao vivo
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Relatório de Oportunidades
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Planilha de KPIs prioritários
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="mb-6">
+                            <span class="text-xs text-slate-400">Investimento</span>
+                            <div class="text-3xl font-extrabold text-white">R$ 2.997 <span class="text-xs font-normal text-slate-400">ou 12x</span></div>
+                        </div>
+                        <a href="https://wa.me/5511951186210?text=Olá,%20Tenho%20interesse%20na%20Imersão%20Diagnóstica." target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-white/10 hover:bg-gold-500 hover:text-black text-white font-semibold text-sm transition-all text-center block">
+                            Garantir Vaga
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 (Featured) -->
+                <div class="bg-[#12151e] border-2 border-gold-500 rounded-3xl p-8 flex flex-col justify-between relative shadow-2xl shadow-gold-500/10 reveal group transform md:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-gold-500 to-gold-600 text-black px-4 py-1 rounded-full text-xs font-extrabold tracking-wider uppercase shadow-md">
+                        Mais Procurado
+                    </div>
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500 text-black flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform font-bold">
+                            <i class="fa-solid fa-chess"></i>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Acompanhamento</span>
+                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Mentoria Board Executivo</h3>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                            6 meses de acompanhamento quinzenal direto com o Dr. Gabriel Vance para reestruturar processos, caixa e equipe comercial.
+                        </p>
+                        <ul class="space-y-3 mb-8 text-sm text-slate-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Encontros quinzenais via Zoom
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Acesso direto via WhatsApp VIP
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Auditoria de processos e equipe
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> 2 Ingressos para o evento anual
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="mb-6">
+                            <span class="text-xs text-slate-400">Investimento</span>
+                            <div class="text-3xl font-extrabold text-white">R$ 12.997 <span class="text-xs font-normal text-slate-400">ou 12x</span></div>
+                        </div>
+                        <a href="https://wa.me/5511951186210?text=Olá,%20Gabriel!%20Quero%20aplicar%20para%20a%20Mentoria%20Board%20Executivo." target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-black font-bold text-sm hover:from-gold-400 hover:to-gold-500 transition-all text-center block shadow-lg">
+                            Aplicar para a Mentoria
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-3xl p-8 flex flex-col justify-between relative hover:border-gold-500/50 transition-all duration-300 reveal group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-city"></i>
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-gold-400 font-bold">Corporativo</span>
+                        <h3 class="text-2xl font-bold text-white mt-1 mb-3">Conselho Consultivo</h3>
+                        <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                            Participação ativa do Dr. Gabriel como conselheiro estratégico em reuniões mensais de diretoria para empresas faturando acima de R$ 10M/ano.
+                        </p>
+                        <ul class="space-y-3 mb-8 text-sm text-slate-300">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Presença em conselhos mensais
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Alinhamento de fusões/aquisições
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-gold-400 text-xs"></i> Suporte em governança corporativa
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="mb-6">
+                            <span class="text-xs text-slate-400">Investimento</span>
+                            <div class="text-3xl font-extrabold text-white">Sob Consulta</div>
+                        </div>
+                        <a href="https://wa.me/5511951186210?text=Olá,%20Gabriel!%20Gostaria%20de%20saber%20sobre%20o%20Conselho%20Consultivo." target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-white/10 hover:bg-gold-500 hover:text-black text-white font-semibold text-sm transition-all text-center block">
+                            Falar com a Equipe
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Prova de Resultado / Metas -->
+    <section id="resultados" class="py-20 bg-[#0d1017] border-y border-white/5 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center reveal">
+                <div class="p-6 rounded-2xl bg-[#12151e] border border-white/5">
+                    <div class="text-3xl sm:text-5xl font-extrabold text-gold-400 mb-2">+R$ 150M</div>
+                    <div class="text-xs sm:text-sm text-slate-400 font-medium">Faturamento gerado para clientes</div>
+                </div>
+                <div class="p-6 rounded-2xl bg-[#12151e] border border-white/5">
+                    <div class="text-3xl sm:text-5xl font-extrabold text-white mb-2">120+</div>
+                    <div class="text-xs sm:text-sm text-slate-400 font-medium">Empresas transformadas</div>
+                </div>
+                <div class="p-6 rounded-2xl bg-[#12151e] border border-white/5">
+                    <div class="text-3xl sm:text-5xl font-extrabold text-gold-400 mb-2">94%</div>
+                    <div class="text-xs sm:text-sm text-slate-400 font-medium">Taxa de retenção e sucesso</div>
+                </div>
+                <div class="p-6 rounded-2xl bg-[#12151e] border border-white/5">
+                    <div class="text-3xl sm:text-5xl font-extrabold text-white mb-2">14 Anos</div>
+                    <div class="text-xs sm:text-sm text-slate-400 font-medium">De experiência em alta gestão</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos / Testimonials -->
+    <section id="depoimentos" class="py-24 bg-[#090a0f] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-4">
+                    Histórias de Sucesso
+                </div>
+                <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-6">
+                    O que dizem os empresários que passaram pelo método.
+                </h2>
+                <p class="text-slate-300 text-base sm:text-lg">
+                    Resultados reais de quem decidiu profissionalizar a gestão do seu negócio.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Testimonial 1 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-3xl p-8 flex flex-col justify-between reveal">
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 italic">
+                            "Antes da mentoria com o Dr. Gabriel, nossa empresa era um caos gerencial onde eu resolvia tudo. Em 6 meses estruturamos processos e dobramos nossa margem líquida."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200" alt="Marcos Vinicius" class="w-12 h-12 rounded-full object-cover border border-gold-500/40" onerror="this.src='https://placehold.co/100x100/12151e/d4a017?text=MV'">
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Marcos Vinicius</h4>
+                            <p class="text-xs text-gold-400">CEO da TechLogística</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-3xl p-8 flex flex-col justify-between reveal">
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 italic">
+                            "O olhar clínico do Gabriel para custos e eficiência comercial mudou completamente o jogo. Hoje temos previsibilidade de caixa e paz mental para planejar o futuro."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200" alt="Camila Siqueira" class="w-12 h-12 rounded-full object-cover border border-gold-500/40" onerror="this.src='https://placehold.co/100x100/12151e/d4a017?text=CS'">
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Camila Siqueira</h4>
+                            <p class="text-xs text-gold-400">Fundadora do Grupo Vitta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-3xl p-8 flex flex-col justify-between reveal">
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6 italic">
+                            "Investimento com retorno mais rápido que já fiz na minha carreira corporativa e empresarial. O nível de profundidade e exigência estratégica é surreal."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200" alt="Renato Castilho" class="w-12 h-12 rounded-full object-cover border border-gold-500/40" onerror="this.src='https://placehold.co/100x100/12151e/d4a017?text=RC'">
+                        <div>
+                            <h4 class="font-bold text-white text-sm">Renato Castilho</h4>
+                            <p class="text-xs text-gold-400">Diretor Executivo Innova</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-[#0d1017] border-t border-white/5 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-400 text-xs font-semibold uppercase tracking-wider mb-4">
+                    Tire Suas Dúvidas
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+                    Perguntas Frequentes
+                </h2>
+                <p class="text-slate-300 text-base">
+                    Tudo o que você precisa saber antes de iniciar sua jornada de transformação empresarial.
+                </p>
+            </div>
+
+            <div class="space-y-4 reveal">
+                <!-- FAQ Item 1 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-semibold text-white flex items-center justify-between gap-4 focus:outline-none">
+                        <span>Como funcionam os encontros da mentoria?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Os encontros são realizados quinzenalmente via Zoom em formato estratégico e prático. Além disso, você conta com suporte contínuo via WhatsApp VIP para dúvidas pontuais entre as sessões.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-semibold text-white flex items-center justify-between gap-4 focus:outline-none">
+                        <span>Para qual tipo de empresa o programa é indicado?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Nossas soluções atendem desde empresas em fase de estruturação de processos até companhias estabelecidas faturando milhões por ano que desejam blindar suas margens e escalar com segurança.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-semibold text-white flex items-center justify-between gap-4 focus:outline-none">
+                        <span>Existe garantia de resultado?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        O resultado depende diretamente da aplicação rigorosa dos frameworks propostos. Oferecemos toda a metodologia testada, ferramentas e acompanhamento de excelência para maximizar suas chances de sucesso absoluto.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-[#12151e] border border-white/10 rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full px-6 py-5 text-left font-semibold text-white flex items-center justify-between gap-4 focus:outline-none">
+                        <span>Como faço para me candidatar?</span>
+                        <i class="fa-solid fa-chevron-down text-gold-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Basta clicar em qualquer botão de agendamento ou do WhatsApp nesta página. Você será direcionado para conversar diretamente com nossa equipe de curadoria estratégica.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#090a0f] border-t border-white/10 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-gold-600 to-gold-400 flex items-center justify-center text-black font-extrabold text-xl">
+                            GV
+                        </div>
+                        <span class="font-bold text-xl text-white">Dr. Gabriel Vance</span>
+                    </a>
+                    <p class="text-slate-400 text-sm max-w-sm mb-6 leading-relaxed">
+                        Transformando negócios complexos em estruturas lucrativas, previsíveis e escaláveis através de estratégia de elite.
+                    </p>
+                    <div class="flex items-center gap-4 text-slate-300 text-lg">
+                        <a href="https://instagram.com/castelloxqw" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-gold-500 hover:text-black transition-all flex items-center justify-center">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-gold-500 hover:text-black transition-all flex items-center justify-center">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-white/5 hover:bg-gold-500 hover:text-black transition-all flex items-center justify-center">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Navegação</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li><a href="#sobre" class="hover:text-gold-400 transition-colors">Sobre Mim</a></li>
+                        <li><a href="#servicos" class="hover:text-gold-400 transition-colors">Soluções</a></li>
+                        <li><a href="#resultados" class="hover:text-gold-400 transition-colors">Resultados</a></li>
+                        <li><a href="#depoimentos" class="hover:text-gold-400 transition-colors">Depoimentos</a></li>
+                        <li><a href="#faq" class="hover:text-gold-400 transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Contato Direto</h4>
+                    <p class="text-sm text-slate-400 mb-3">Atendimento comercial e mentoria executiva.</p>
+                    <a href="https://wa.me/5511951186210?text=Olá,%20Gabriel!%20Gostaria%20de%20falar%20com%20sua%20equipe." target="_blank" rel="noopener noreferrer" class="text-gold-400 hover:underline font-semibold text-sm flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> +55 (11) 99999-9999
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Dr. Gabriel Vance. Todos os direitos reservados.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-slate-400 transition-colors">Termos de Uso</a>
+                    <a href="#" class="hover:text-slate-400 transition-colors">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons (WhatsApp & Instagram) -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <!-- Instagram Floating Button -->
+        <a href="https://instagram.com/castelloxqw" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 via-pink-600 to-purple-700 text-white flex items-center justify-center text-xl shadow-lg hover:scale-110 transition-transform" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+        <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/5511951186210?text=Olá,%20Dr.%20Gabriel!%20Vim%20através%20da%20sua%20landing%20page%20e%20gostaria%20de%20mais%20informações." target="_blank" rel="noopener noreferrer" class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-xl whatsapp-float hover:scale-110 transition-transform" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript for Mobile Menu, FAQ Accordion, and Scroll Reveal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // FAQ Accordion
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const content = toggle.nextElementSibling;
+                    const icon = toggle.querySelector('fa-chevron-down, i');
+                    
+                    // Toggle current
+                    content.classList.toggle('hidden');
+                    if (icon) {
+                        icon.classList.toggle('rotate-180');
+                    }
+
+                    // Close others
+                    faqToggles.forEach(other => {
+                        if (other !== toggle) {
+                            other.nextElementSibling.classList.add('hidden');
+                            const otherIcon = other.querySelector('i');
+                            if (otherIcon) {
+                                otherIcon.classList.remove('rotate-180');
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Scroll Reveal Animation with Intersection Observer
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-xl', 'bg-[#090a0f]/95');
+                } else {
+                    navbar.classList.remove('shadow-xl', 'bg-[#090a0f]/95');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
